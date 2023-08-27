@@ -1,0 +1,13 @@
+﻿<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package Name="ScanServerInstaller" Manufacturer="Tailosoft SA" Version="1.0.0.0" UpgradeCode="9632595a-3ba4-4f28-8eb2-c6a54c813204">
+	
+	<MediaTemplate EmbedCab="yes" />
+    <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
+
+    <Feature Id="Main">
+      <ComponentGroupRef Id="ScanServer" />
+    </Feature>
+	  
+	 
+  </Package>
+</Wix>

@@ -1,0 +1,35 @@
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+	<Fragment>
+		<ComponentGroup Id="ScanServer" Directory="INSTALLFOLDER">
+			<Component Id="ScanServerExe">
+				<File Source="..\ScanServer\bin\Release\net7.0\win-x64\publish\ScanServer.exe" />
+				<ServiceInstall
+				  Id="ServiceInstall"
+				  Type="ownProcess"
+				  Name="ScanServer"
+				  DisplayName="Scan Server"
+				  Description="This Scan server allows to send http requests to trigger document scans."
+				  Start="auto"
+				  Account="[SERVICEACCOUNT]"
+				  Password="[SERVICEPASSWORD]"
+				  ErrorControl="normal"
+				  Interactive="no">
+				</ServiceInstall>
+
+				<ServiceControl
+				  Id="ServiceControl"
+				  Name="ScanServer"
+				  Start="install"
+				  Stop="both"
+				  Remove="uninstall"
+				  Wait="yes"
+				>
+				</ServiceControl>
+
+			</Component>
+			<Component Id="NAPS2WorkerExe">
+				<File Source="..\ScanServer\bin\Release\net7.0\win-x64\publish\NAPS2.Worker.exe" />
+			</Component>
+		</ComponentGroup>
+	</Fragment>
+</Wix>

@@ -1,0 +1,12 @@
+# vscode
+.vscode
+.history
+
+# .net
+obj/
+bin/
+temp/
+
+# visual studio
+*.user
+.vs
