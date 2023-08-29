@@ -2,8 +2,6 @@ using Microsoft.Extensions.Hosting.WindowsServices;
 using ScanServer.Controllers;
 using System.Diagnostics;
 
-ILogger<WebApplication> _logger;
-
 var options = new WebApplicationOptions
 {
     Args = args,

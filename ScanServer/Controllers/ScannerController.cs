@@ -33,7 +33,7 @@ namespace ScanServer.Controllers
             // TODO based on env Var change driver
             // TODO set 32 or 64 based on OS
             //var devices = await _scanController.GetDeviceList(new ScanOptions { Driver = Driver.Twain, TwainOptions = { Dsm = TwainDsm.Old, Adapter = TwainAdapter.Legacy } });
-            var devices = await _scanController.GetDeviceList(Driver.Twain);
+            var devices = await _scanController.GetDeviceList();
             return Ok(devices);
         }
 
@@ -41,13 +41,13 @@ namespace ScanServer.Controllers
         public async Task<ActionResult> Scan([FromRoute] string deviceId)
         {
             _logger.LogDebug($"{nameof(Scan)}");
-            var devices = await _scanController.GetDeviceList(Driver.Twain);
+            var devices = await _scanController.GetDeviceList();
             ScanDevice device = devices.Find(d => d.ID == deviceId);
             if (device == null)
             {
                 return NotFound();
             }
-            var scannedImages = _scanController.Scan(new ScanOptions { Device = device, Driver = Driver.Twain, Dpi = 200 }).ToBlockingEnumerable().ToList();
+            var scannedImages = _scanController.Scan(new ScanOptions { Device = device, Dpi = 200 }).ToBlockingEnumerable().ToList();
             if (scannedImages.Count == 0)
             {
                 return NotFound();

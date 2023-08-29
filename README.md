@@ -29,6 +29,19 @@ dotnet clean
 dotnet build -c Release
 ```
 
+## Debug
+
+To be able to attach the visual studio debugger on a running Windows Service, the project needs to be build in Debug and not release.
+
+**Make sure to disable single file...**
+```
+dotnet build ScanServer.csproj -c Debug
+```
+
+Then create a Windows service **using cmd as administrator and not powershell** using the .exe in the debug file, make sure to stop the release server since they by default use the same port.
+```
+sc create ScanServerDebug binPath= "C:\Path\To\ScanServer\bin\Debug\net7.0\win-x64\ScanServer.exe" DisplayName= "Scan Server Debug" start= auto obj= "LocalSystem"
+```
 
 ## Uninstall:
 
