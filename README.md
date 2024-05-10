@@ -13,6 +13,24 @@ There are two projects:
 Just run/install the app.
 List the devices on: http://localhost:5000/api/scanners
 
+You can perform a scan and handle exceptions like this:
+```
+      const scanResponse = await fetch(`http://localhost:5000/api/scan/${encodeURIComponent(scannerId)}`).catch(() => null);
+      if (!scanResponse) {
+        return Promise.reject('Failed to Perform Scan');
+      }
+      if (scanResponse.ok) {
+        return new File([await scanResponse.blob()], `Scan-${+new Date()}`, { type: scanResponse.headers.get('Content-Type')! });
+      } else {
+        console.error('Failed to perform scan', scanResponse);
+        if (scanResponse.status === 404) {
+          return Promise.reject('Scanner not found');
+        } else {
+          return Promise.reject('Failed to Perform Scan');
+        }
+      }
+```
+
 
 ## Getting started
 
